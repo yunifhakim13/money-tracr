@@ -1,0 +1,51 @@
+.parentCard {
+  width: 1440px;
+  height: 460px;
+  background-color: #79ac78;
+}
+
+.abs-card {
+  top: 1050px;
+  height: 460px;
+  margin-left: 120px;
+  margin-right: 120px;
+}
+
+.lay-card {
+  max-width: 320px;
+  max-height: 320px;
+}
+
+.lay-title {
+  color: #186f65;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.lay-text {
+  color: #b0b0b0;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.deskPar {
+  padding-bottom: 120px;
+}
+
+.desk {
+  margin-top: 292px;
+  padding-left: 120px;
+  padding-right: 368px;
+  color: #000;
+  font-size: 40px !important;
+  font-weight: 400 !important;
+  height: 102px;
+}
+
+.deskBtn {
+  margin-top: 320px;
+}
+
+.bottomDesk {
+  border-top: 1px solid #618264;
+}

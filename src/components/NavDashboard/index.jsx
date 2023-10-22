@@ -1,17 +1,17 @@
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import BtnBorder from "../BtnBorder";
+import Button from "../Button";
 import Logo from "../Logo";
-import "./Navigation.css";
+import "./NavDash.css";
 
-const Navigation = () => {
+const NavDashboard = () => {
   return (
     <>
       <nav className="container-fluid parNav navbar py-2">
         <div className="parLogo container-fluid">
           <Logo />
           <div className="d-flex gap-2 nav-item" role="search">
-            <Link to="/" className="btn style-logout">
-              Logout
-            </Link>
+            <Button>{"Login"}</Button>
+            <BtnBorder>{"Register"}</BtnBorder>
           </div>
         </div>
       </nav>
@@ -19,4 +19,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+export default NavDashboard;

@@ -1,0 +1,41 @@
+.parent-dashboard {
+  height: 360px;
+  background-color: #79ac78;
+}
+
+.child-dashboard {
+  padding: 100px 0px 210px 120px;
+}
+
+.title-dashboard {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.text-dashboard {
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.text-card {
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.parent-card {
+  top: 320px;
+}
+
+.child-card {
+  height: 182px !important;
+}
+
+.title-flow {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.child-title {
+  font-size: 24px;
+  font-weight: 300;
+}

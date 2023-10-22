@@ -1,0 +1,9 @@
+.login {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: #79ac78 !important;
+}
+
+.login:hover {
+  color: #186f65 !important;
+}

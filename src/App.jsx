@@ -1,12 +1,20 @@
-import "./App.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
     <>
-      <div className="container">
-        <h1>Hello World</h1>
-        <button className="btn btn-primary">Generate</button>
-      </div>
+      <Router history={history}>
+        <Switch>
+          <Route exact path="/" component={Home}></Route>
+          <Route path="/login" component={Login}></Route>
+          <Route path="/register" component={Register}></Route>
+          <Route path="/dashboard" component={Dashboard}></Route>
+        </Switch>
+      </Router>
     </>
   );
 }
