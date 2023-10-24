@@ -1,17 +1,31 @@
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Logo from "../Logo";
 import "./Navigation.css";
+import { signOut } from "firebase/auth";
+import { auth } from "../../config/firebase.js";
 
 const Navigation = () => {
+  const history = useHistory();
+
+  const userSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("sign out success");
+        localStorage.removeItem("user");
+        history.push("/");
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <>
       <nav className="container-fluid parNav navbar py-2">
         <div className="parLogo container-fluid">
           <Logo />
           <div className="d-flex gap-2 nav-item" role="search">
-            <Link to="/" className="btn style-logout">
+            <button onClick={userSignOut} className="btn style-logout">
               Logout
-            </Link>
+            </button>
           </div>
         </div>
       </nav>

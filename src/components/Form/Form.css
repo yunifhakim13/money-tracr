@@ -1,0 +1,28 @@
+.title-form {
+}
+
+.parent-form {
+  background: #79ac78;
+  width: 794px !important;
+}
+
+.in-area {
+  padding: 54px 90px;
+}
+
+.btn-submit {
+  width: 166px !important;
+  height: 40px !important;
+}
+
+.btn-submit:hover {
+  background-color: transparent !important;
+  color: #fff !important;
+}
+
+.btn-cancel {
+  width: 166px;
+  height: 40px;
+  color: #fff !important;
+  background-color: #b2533e !important;
+}

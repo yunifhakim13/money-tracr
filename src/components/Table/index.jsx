@@ -7,7 +7,9 @@ const Table = () => {
       <div className="container text-left parent-table">
         <div className="d-flex justify-content-between align-items-center pb-4">
           <h1 className="title-table">Transaction History</h1>
-          <Link className="add-transaction btn">Add Transaction</Link>
+          <Link to="/transaction" className="add-transaction btn">
+            Add Transaction
+          </Link>
         </div>
         <table className="table style-table text-center">
           <thead>

@@ -3,13 +3,36 @@ import "./HeroDash.css";
 import Wallet from "../../assets/Wallet.svg";
 import Earning from "../../assets/Earning.svg";
 import Spending from "../../assets/Spending.svg";
+import { useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../config/firebase.js";
 
 const HeroDashboard = () => {
+  const [authUser, setAuthUser] = useState(null);
+
+  useEffect(() => {
+    const listen = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setAuthUser(user);
+      } else {
+        setAuthUser(null);
+      }
+    });
+
+    return () => {
+      listen();
+    };
+  }, []);
+
   return (
     <>
       <div className="container-fluid parent-dashboard position-relative">
         <div className="container child-dashboard">
-          <h1 className="title-dashboard text-white">Hello, Username</h1>
+          {authUser && (
+            <h1 className="title-dashboard text-white">
+              Hello, {authUser.email}
+            </h1>
+          )}
           <p className="text-dashboard text-white">Transaction Info</p>
         </div>
       </div>
