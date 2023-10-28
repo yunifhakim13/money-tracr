@@ -1,14 +1,24 @@
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useNavigate } from "react-router-dom";
 import "../../index.css";
 import "./Form.css";
 import Input from "../Input";
 import InputSelect from "../InputSelect";
 import { useState } from "react";
+import axios from "axios";
 
 const Form = () => {
   const [number, setNumber] = useState("");
   const Type = ["Earning", "Spending"];
-  const Category = ["Primary", "Secundary"];
+  const Category = ["Primary", "Secondary"];
+  const [formData, setFormData] = useState({
+    transactionName: "",
+    type: Type[0],
+    category: Category[0],
+    amount: "",
+    date: "",
+  });
+
+  const navigate = useNavigate();
 
   // value tidak boleh <0 dan rupiah formatting
   const handleAmount = (e) => {
@@ -20,10 +30,46 @@ const Form = () => {
     const value = e.target.value;
     if (value === "" || (!isNaN(value) && value >= 0)) {
       setNumber(value);
+      setFormData({ ...formData, amount: value });
     }
   };
 
-  console.log(handleAmount);
+  const handleNameChange = (e) => {
+    setFormData({ ...formData, transactionName: e.target.value });
+  };
+  const handleTypeChange = (e) => {
+    setFormData({ ...formData, type: e.target.value });
+  };
+  const handleCategoryChange = (e) => {
+    setFormData({ ...formData, category: e.target.value });
+  };
+  const handleDateChange = (e) => {
+    const dateValue = e.target.value;
+    setFormData({ ...formData, date: dateValue });
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(formData);
+    axios
+      .post(process.env.API_CRUD, formData)
+      .then((response) => {
+        console.log("Transaction added:", response.data);
+        setNumber("");
+        setFormData({
+          transactionName: "",
+          type: "",
+          category: "",
+          amount: "",
+          date: "",
+        });
+        navigate("/dashboard");
+      })
+      .catch((error) => {
+        console.error("Error adding transaction:", error);
+      });
+  };
 
   return (
     <>
@@ -32,27 +78,55 @@ const Form = () => {
         <p>Please fill up the blank field below</p>
       </div>
       <div className="container parent-form rounded shadow">
-        <form className="in-area">
-          <Input children={"Transaction Name"} type={"text"} />
-          <InputSelect textLabel={"Type"} dinamisOption={Type}></InputSelect>
-          <InputSelect
-            textLabel={"Category"}
-            dinamisOption={Category}></InputSelect>
+        <form className="in-area" onSubmit={handleFormSubmit}>
           <Input
-            children={"Amount"}
+            parentInput={"text-white pb-4"}
+            className={"form-control"}
+            children={"Transaction Name"}
+            value={formData.name}
+            onChange={handleNameChange}
             type={"text"}
-            value={number}
+          />
+          <InputSelect
+            parentClass={"text-white pb-4"}
+            className={"form-control"}
+            textLabel={"Type"}
+            onChange={handleTypeChange}
+            dinamisOption={Type}
+          />
+          <InputSelect
+            parentClass={"text-white pb-4"}
+            className={"form-control"}
+            textLabel={"Category"}
+            onChange={handleCategoryChange}
+            dinamisOption={Category}
+          />
+          <Input
+            parentInput={"text-white pb-4"}
+            className={"form-control"}
+            children={"Amount"}
+            type={"number"}
+            value={formData.amount}
             onChange={handleAmount}
           />
-          <Input children={"Date"} type={"date"} />
+          <Input
+            parentInput={"text-white pb-4"}
+            className={"form-control"}
+            children={"Date"}
+            value={formData.date}
+            onChange={handleDateChange}
+            type={"date"}
+          />
           <div className="text-center d-flex flex-column gap-2 pt-3">
             <div>
-              <Link className="btn btn-outline-light btn-submit" type="submit">
+              <button
+                className="btn btn-outline-light btn-submit"
+                type="submit">
                 Add Transaction
-              </Link>
+              </button>
             </div>
             <div>
-              <Link to="/dashboard" className="btn btn-cancel" type="submit">
+              <Link to="/dashboard" className="btn btn-cancel" type="cancel">
                 Cancel
               </Link>
             </div>

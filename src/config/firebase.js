@@ -2,13 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyADbIP0a5-JsuWwyVJBBWJCUJWCfQcuvRs",
-  authDomain: "moneytrackr-aeaa6.firebaseapp.com",
-  projectId: "moneytrackr-aeaa6",
-  storageBucket: "moneytrackr-aeaa6.appspot.com",
-  messagingSenderId: "781282600655",
-  appId: "1:781282600655:web:c0af8778ab442e2a0939ba",
-  measurementId: "G-RB6LTBJY7M",
+  apiKey: process.env.LOGIN_API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID,
+  measurementId: process.env.MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);

@@ -69,5 +69,10 @@
 
 .type-earning {
   color: #fff;
-  background: #79ac78;
+  background: #79ac78 !important;
+}
+
+.modal-parent {
+  background-color: #79ac78;
+  max-width: 50% !important;
 }

@@ -2,7 +2,7 @@ import "../../index.css";
 import "./Login.css";
 import NavDashboard from "../../components/NavDashboard";
 import RightImg from "../../assets/Account.svg";
-import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/Input";
 import { useEffect, useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -13,28 +13,28 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
-      history.push("/dashboard");
+      navigate("/dashboard");
     }
-  }, [history]);
+  }, [navigate]);
 
   const handleLogin = (e) => {
     e.preventDefault();
-
+    setError(null);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
         localStorage.setItem("user", JSON.stringify(user));
-        history.push("/dashboard");
+        navigate("/dashboard");
       })
       .catch((error) => {
         console.error(error);
-        setError("Invalid email or password."); // Provide user-friendly error message
+        setError("Invalid email or password!!!"); // Provide user-friendly error message
       });
   };
 
@@ -47,8 +47,13 @@ const Login = () => {
         </div>
         <div className="wrapLogin rounded shadow text-white">
           <h1 className="text-center pt-5 pb-3">Login Account</h1>
+          {error && (
+            <div className="error-message text-center text-danger">{error}</div>
+          )}
           <form className="px-5" onSubmit={handleLogin}>
             <Input
+              parentInput={"text-white pb-3"}
+              className={"form-control px-1"}
               children={"Email"}
               type={"email"}
               name={"email"}
@@ -56,6 +61,8 @@ const Login = () => {
               placeholder={"example@gmail.com"}
             />
             <Input
+              parentInput={"text-white pb-3"}
+              className={"form-control px-1"}
               children={"Password"}
               type={"password"}
               name={"password"}

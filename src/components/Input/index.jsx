@@ -5,13 +5,15 @@ export default function ({
   placeholder,
   onChange,
   name,
+  className,
+  parentInput,
 }) {
   return (
     <>
-      <div className="pb-4 text-white">
-        <label className="pb-1">{children}</label>
+      <div className={parentInput}>
+        <label>{children}</label>
         <input
-          className="form-control"
+          className={className}
           type={type}
           value={value}
           onChange={onChange}

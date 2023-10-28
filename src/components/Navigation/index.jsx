@@ -1,18 +1,18 @@
-import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate } from "react-router-dom";
 import Logo from "../Logo";
 import "./Navigation.css";
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebase.js";
 
 const Navigation = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const userSignOut = () => {
     signOut(auth)
       .then(() => {
         console.log("sign out success");
         localStorage.removeItem("user");
-        history.push("/");
+        navigate("/");
       })
       .catch((error) => console.log(error));
   };
