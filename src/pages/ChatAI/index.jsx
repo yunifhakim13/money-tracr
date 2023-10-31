@@ -8,7 +8,7 @@ const ChatAI = () => {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const openai = new OpenAI({
-    apiKey: process.env.API_OPENAI,
+    apiKey: import.meta.env.VITE_API_OPENAI,
     dangerouslyAllowBrowser: true,
   });
 

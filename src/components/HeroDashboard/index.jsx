@@ -14,7 +14,7 @@ const HeroDashboard = () => {
 
   useEffect(() => {
     axios
-      .get(process.env.API_CRUD)
+      .get(import.meta.env.VITE_API_CRUD)
       .then((response) => {
         setPosts(response.data);
       })

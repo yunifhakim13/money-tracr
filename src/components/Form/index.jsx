@@ -48,7 +48,7 @@ const Form = () => {
 
     console.log(formData);
     axios
-      .post(process.env.API_CRUD, formData)
+      .post(import.meta.env.VITE_API_CRUD, formData)
       .then((response) => {
         console.log("Transaction added:", response.data);
         setNumber("");

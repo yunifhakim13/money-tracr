@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = process.env.API_CRUD;
+const url = import.meta.env.VITE_API_CRUD;
 
 export const getPost = () => {
   return axios.get(`${url}/List`, {

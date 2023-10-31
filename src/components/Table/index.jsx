@@ -14,7 +14,7 @@ const Table = () => {
 
   useEffect(() => {
     axios
-      .get(process.env.API_CRUD)
+      .get(import.meta.env.VITE_API_CRUD)
       .then((response) => {
         setPosts(response.data);
       })
@@ -30,7 +30,9 @@ const Table = () => {
 
     if (confirmDelete) {
       try {
-        const res = await axios.delete(`${process.env.API_CRUD}/${id}`);
+        const res = await axios.delete(
+          `${import.meta.env.VITE_API_CRUD}/${id}`
+        );
         location.reload();
       } catch (error) {
         console.error("Error deleting data:", error);
@@ -49,7 +51,7 @@ const Table = () => {
   const saveEditedItem = async () => {
     try {
       const res = await axios.put(
-        `${process.env.API_CRUD}/${editItemId}`,
+        `${import.meta.env.VITE_API_CRUD}/${editItemId}`,
         editedItem
       );
       location.reload();
