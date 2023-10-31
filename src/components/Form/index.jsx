@@ -22,11 +22,6 @@ const Form = () => {
 
   // value tidak boleh <0 dan rupiah formatting
   const handleAmount = (e) => {
-    new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-    }).format(number);
-
     const value = e.target.value;
     if (value === "" || (!isNaN(value) && value >= 0)) {
       setNumber(value);
@@ -105,7 +100,7 @@ const Form = () => {
             parentInput={"text-white pb-4"}
             className={"form-control"}
             children={"Amount"}
-            type={"number"}
+            type={"text"}
             value={formData.amount}
             onChange={handleAmount}
           />

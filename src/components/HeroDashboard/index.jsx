@@ -6,9 +6,43 @@ import Spending from "../../assets/Spending.svg";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../config/firebase.js";
+import axios from "axios";
 
 const HeroDashboard = () => {
   const [authUser, setAuthUser] = useState(null);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(process.env.API_CRUD)
+      .then((response) => {
+        setPosts(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+  let totalSpending = 0;
+  let totalEarning = 0;
+
+  posts.forEach((item) => {
+    if (item.type === "Spending") {
+      totalSpending += parseFloat(item.amount);
+    } else if (item.type === "Earning") {
+      totalEarning += parseFloat(item.amount);
+    }
+  });
+  console.log(totalEarning, totalSpending);
+
+  const calculateCardBalance = () => {
+    let cardBalance = totalEarning - totalSpending;
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
+    }).format(cardBalance);
+  };
 
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
@@ -45,7 +79,7 @@ const HeroDashboard = () => {
                 <span className="ps-3 text-card">Balence</span>
               </div>
               <div className="card-title pt-2">
-                <h1>Rp 9.0000.000,00</h1>
+                <h1>{calculateCardBalance()}</h1>
               </div>
             </div>
           </div>
@@ -55,7 +89,13 @@ const HeroDashboard = () => {
                 <img src={Earning} alt="walletIcon" />
                 <div className="card-title d-flex flex-column">
                   <p className="child-title">Earning</p>
-                  <h1 className="title-flow">Rp 9.000.000,00</h1>
+                  <h1 className="title-flow">
+                    {new Intl.NumberFormat("id-ID", {
+                      style: "currency",
+                      currency: "IDR",
+                      minimumFractionDigits: 0,
+                    }).format(totalEarning)}
+                  </h1>
                 </div>
               </div>
             </div>
@@ -66,7 +106,13 @@ const HeroDashboard = () => {
                 <img src={Spending} alt="walletIcon" />
                 <div className="card-title d-flex flex-column">
                   <p className="child-title">Spending</p>
-                  <h1 className="title-flow">Rp 9.000.000,00</h1>
+                  <h1 className="title-flow">
+                    {new Intl.NumberFormat("id-ID", {
+                      style: "currency",
+                      currency: "IDR",
+                      minimumFractionDigits: 0,
+                    }).format(totalSpending)}
+                  </h1>
                 </div>
               </div>
             </div>

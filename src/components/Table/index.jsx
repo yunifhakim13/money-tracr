@@ -191,7 +191,13 @@ const Table = () => {
                       </p>
                     </td>
                     <td className="py-4">{item.category}</td>
-                    <td className="py-4">{item.amount}</td>
+                    <td className="py-4">
+                      {new Intl.NumberFormat("id-ID", {
+                        style: "currency",
+                        currency: "IDR",
+                        minimumFractionDigits: 0,
+                      }).format(item.amount)}
+                    </td>
                     <td className="py-4">{item.date}</td>
                     <td className="py-4">
                       <button

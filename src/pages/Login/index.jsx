@@ -20,7 +20,7 @@ const Login = () => {
     if (user) {
       navigate("/dashboard");
     }
-  }, [navigate]);
+  }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -34,7 +34,7 @@ const Login = () => {
       })
       .catch((error) => {
         console.error(error);
-        setError("Invalid email or password!!!"); // Provide user-friendly error message
+        setError("Invalid email or password!!!");
       });
   };
 

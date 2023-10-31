@@ -17,6 +17,7 @@ export default defineConfig(({ mode }) => {
       "process.env.APP_ID": JSON.stringify(env.APP_ID),
       "process.env.MEASUREMENT_ID": JSON.stringify(env.MEASUREMENT_ID),
       "process.env.API_CRUD": JSON.stringify(env.API_CRUD),
+      "process.env.API_OPENAI": JSON.stringify(env.API_OPENAI),
     },
   };
 });

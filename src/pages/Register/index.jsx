@@ -82,9 +82,15 @@ const Register = () => {
                 </button>
                 <br />
                 <div className="py-3">
-                  <Link to="/" className="reg-to-home text-white">
-                    Back to home
+                  <Link to="/login" className="reg-to-home text-white">
+                    Already have an account
                   </Link>
+                  <div>
+                    <span> or </span>
+                    <Link to="/" className="reg-to-home text-white">
+                      Back to home
+                    </Link>
+                  </div>
                 </div>
               </div>
             </form>

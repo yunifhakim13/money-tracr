@@ -3,11 +3,14 @@ import Table from "../../components/Table";
 import Navigation from "../../components/Navigation";
 
 const Dashboard = () => {
+  const updateTotalsFunction = (updatedTotals) => {
+    setTotals(updatedTotals);
+  };
   return (
     <>
       <Navigation />
       <HeroDashboard />
-      <Table />
+      <Table updateTotals={updateTotalsFunction} />
     </>
   );
 };
