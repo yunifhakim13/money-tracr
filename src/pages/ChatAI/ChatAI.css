@@ -1,0 +1,28 @@
+h1 {
+  margin: 0 !important;
+}
+
+.title-chat {
+  color: #79ac78;
+  font-weight: 600;
+}
+
+.parent-chat {
+  width: 794px !important;
+  height: 736px !important;
+  background-color: #79ac78;
+}
+
+.paragrap-chat {
+  color: #b0b0b0 !important;
+  font-size: 18px !important;
+  font-weight: 300 !important;
+}
+
+.input-area {
+  width: 590px !important;
+}
+
+.back-home {
+  color: #79ac78 !important;
+}

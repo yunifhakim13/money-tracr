@@ -1,0 +1,38 @@
+p {
+  margin: 0 !important;
+}
+
+.rightImg {
+  width: 600px;
+  height: 600px;
+  margin-top: 30px;
+  margin-right: 100px;
+}
+
+.wrapLogin {
+  margin-top: 100px;
+  background: #79ac78;
+  width: 582px;
+  height: 470px;
+}
+
+.form-control {
+  height: 44px;
+}
+
+.btnLogin {
+  padding: 8px 90px 8px 90px !important;
+}
+
+.btnLogin:hover {
+  background-color: transparent !important;
+  color: #fff !important;
+}
+
+.btnBackHome {
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration-line: underline;
+  margin-top: 1px;
+  color: #fff;
+}

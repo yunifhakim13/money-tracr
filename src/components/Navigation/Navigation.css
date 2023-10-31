@@ -1,0 +1,13 @@
+.style-logout {
+  width: 166px !important;
+  height: 40px !important;
+  color: #fff !important;
+  background: #b2533e !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+.style-logout:hover {
+  background-color: #9c4936 !important;
+  color: #fff !important;
+}

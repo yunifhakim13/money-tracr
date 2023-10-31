@@ -1,0 +1,78 @@
+.parent-table {
+  padding-top: 150px;
+  padding-bottom: 182px;
+}
+
+.title-table {
+  color: #79ac78;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.add-transaction {
+  width: 166px !important;
+  height: 40px !important;
+  background: #79ac78 !important;
+  color: #fff !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  padding-top: 8px !important;
+}
+
+.add-transaction:hover {
+  background-color: #6c9e6b !important;
+  color: #fff !important;
+}
+
+.style-table {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.head-table {
+  background: #79ac78 !important;
+  color: #fff !important;
+}
+
+.edit-style {
+  width: 124px;
+  height: 40px;
+  background: #79ac78 !important;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.edit-style:hover {
+  background-color: #6c9e6b !important;
+  color: #fff !important;
+}
+
+.delete-style {
+  width: 124px;
+  height: 40px;
+  background: #b2533e !important;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.delete-style:hover {
+  background-color: #9c4936 !important;
+  color: #fff !important;
+}
+
+.type-spending {
+  color: #fff;
+  background: #b2533e !important;
+}
+
+.type-earning {
+  color: #fff;
+  background: #79ac78 !important;
+}
+
+.modal-parent {
+  background-color: #79ac78;
+  max-width: 50% !important;
+}

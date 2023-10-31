@@ -1,0 +1,23 @@
+.sec-reg {
+  padding: 100px 415px;
+}
+
+.parRegister {
+  background: #79ac78;
+  width: 608px;
+  height: 509px;
+}
+
+.bt-reg {
+  padding: 8px 90px 8px 90px !important;
+}
+
+.reg-to-home {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.mod-input {
+  font-size: 20px;
+  font-weight: 400;
+}

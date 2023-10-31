@@ -1,0 +1,31 @@
+.title-hero {
+  color: #618264 !important;
+  font-size: 70px !important;
+  font-weight: 600 !important;
+  max-width: 750px !important;
+}
+
+.span {
+  color: #186f65 !important;
+}
+
+.paragraph-hero {
+  color: #b0b0b0;
+  font-size: 16px;
+  font-weight: 400;
+  max-width: 680px;
+}
+
+.img-format {
+  width: 600px;
+  height: 600px;
+}
+.chatai {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: #79ac78 !important;
+}
+
+.chatai:hover {
+  color: #186f65 !important;
+}

@@ -1,0 +1,30 @@
+.parFooter {
+  padding-right: 543px;
+}
+
+.logoStyle {
+  padding-left: 120px;
+}
+
+.textFooter {
+  padding-left: 120px;
+}
+
+.titleFooter {
+  color: #78aa78;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.sosmed {
+  color: #b0b0b0;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.bottomFooter {
+  padding-top: 50px !important;
+  color: #b0b0b0;
+  font-size: 16px;
+  font-weight: 300;
+}
