@@ -17,8 +17,8 @@
 }
 
 .img-format {
-  width: 600px;
-  height: 600px;
+  width: 600px !important;
+  height: 600px !important;
 }
 .chatai {
   font-size: 14px !important;
