@@ -23,7 +23,7 @@ const Table = () => {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, [posts]);
+  }, [isLoading]);
 
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm(
@@ -62,6 +62,7 @@ const Table = () => {
       setEditItemId(null);
       setEditedItem({});
       setIsLoading(false);
+      // location.reload();
     } catch (error) {
       console.error("Error updating data:", error);
     }
