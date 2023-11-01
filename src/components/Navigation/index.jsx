@@ -13,7 +13,6 @@ const Navigation = () => {
     if (isConfirmed) {
       signOut(auth)
         .then(() => {
-          console.log("sign out success");
           localStorage.removeItem("user");
           navigate("/");
         })
