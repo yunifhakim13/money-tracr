@@ -3,10 +3,12 @@ import NavDashboard from "../../components/NavDashboard";
 import OpenAI from "openai";
 import "./ChatAI.css";
 import { Link } from "react-router-dom";
+import LoaderWhite from "../../components/LoaderWhite";
 
 const ChatAI = () => {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const openai = new OpenAI({
     apiKey: import.meta.env.VITE_API_OPENAI,
     dangerouslyAllowBrowser: true,
@@ -14,6 +16,7 @@ const ChatAI = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const res = await openai.completions.create({
       prompt: input,
       model: "text-davinci-003",
@@ -21,6 +24,7 @@ const ChatAI = () => {
     });
 
     setOutput(res.choices[0].text);
+    setIsLoading(false);
   };
 
   return (
@@ -46,6 +50,7 @@ const ChatAI = () => {
               <button type="submit" className="btn btn-outline-light my-3 ">
                 Generate
               </button>
+              {isLoading && <LoaderWhite />}
             </div>
           </form>
           <div className="container  pb-5 text-start text-white">{output}</div>

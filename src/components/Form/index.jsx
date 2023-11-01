@@ -5,11 +5,13 @@ import Input from "../Input";
 import InputSelect from "../InputSelect";
 import { useState } from "react";
 import axios from "axios";
+import LoaderWhite from "../LoaderWhite";
 
 const Form = () => {
   const [number, setNumber] = useState("");
   const Type = ["Earning", "Spending"];
   const Category = ["Primary", "Secondary"];
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     transactionName: "",
     type: Type[0],
@@ -20,7 +22,6 @@ const Form = () => {
 
   const navigate = useNavigate();
 
-  // value tidak boleh <0 dan rupiah formatting
   const handleAmount = (e) => {
     const value = e.target.value;
     if (value === "" || (!isNaN(value) && value >= 0)) {
@@ -45,6 +46,7 @@ const Form = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     console.log(formData);
     axios
@@ -63,7 +65,14 @@ const Form = () => {
       })
       .catch((error) => {
         console.error("Error adding transaction:", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
+  };
+
+  const formStyles = {
+    visibility: isLoading ? "hidden" : "visible",
   };
 
   return (
@@ -113,14 +122,15 @@ const Form = () => {
             type={"date"}
           />
           <div className="text-center d-flex flex-column gap-2 pt-3">
-            <div>
+            <div style={formStyles}>
               <button
                 className="btn btn-outline-light btn-submit"
                 type="submit">
                 Add Transaction
               </button>
             </div>
-            <div>
+            {isLoading && <LoaderWhite />}
+            <div style={formStyles}>
               <Link to="/dashboard" className="btn btn-cancel" type="cancel">
                 Cancel
               </Link>

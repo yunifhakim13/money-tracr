@@ -4,11 +4,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import InputSelect from "../InputSelect";
 import Input from "../Input";
+import Loader from "../Loader";
 
 const Table = () => {
   const [posts, setPosts] = useState([]);
   const [editItemId, setEditItemId] = useState(null);
   const [editedItem, setEditedItem] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const Type = ["Earning", "Spending"];
   const Category = ["Primary", "Secondary"];
 
@@ -21,19 +23,20 @@ const Table = () => {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, []);
+  }, [posts]);
 
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this item?"
     );
+    setIsLoading(true);
 
     if (confirmDelete) {
       try {
         const res = await axios.delete(
           `${import.meta.env.VITE_API_CRUD}/${id}`
         );
-        location.reload();
+        setIsLoading(false);
       } catch (error) {
         console.error("Error deleting data:", error);
       }
@@ -49,15 +52,16 @@ const Table = () => {
   };
 
   const saveEditedItem = async () => {
+    setIsLoading(true);
     try {
       const res = await axios.put(
         `${import.meta.env.VITE_API_CRUD}/${editItemId}`,
         editedItem
       );
-      location.reload();
 
       setEditItemId(null);
       setEditedItem({});
+      setIsLoading(false);
     } catch (error) {
       console.error("Error updating data:", error);
     }
@@ -100,124 +104,143 @@ const Table = () => {
               </th>
             </tr>
           </thead>
-          <tbody>
-            {posts.map((item, index) => (
-              <tr
-                key={index}
-                className={
-                  item.type === "Spending" ? "type-spending" : "type-earning"
-                }>
-                {editItemId === item.id ? (
-                  <>
-                    <td>
-                      <Input
-                        className={"form-control text-center px-1"}
-                        type="text"
-                        value={editedItem.transactionName}
-                        onChange={(e) =>
-                          setEditedItem({
-                            ...editedItem,
-                            transactionName: e.target.value,
-                          })
-                        }
-                      />
-                    </td>
-                    <td>
-                      <InputSelect
-                        className={"form-control text-center pt-1"}
-                        onChange={(e) =>
-                          setEditedItem({ ...editedItem, type: e.target.value })
-                        }
-                        dinamisOption={Type}
-                      />
-                    </td>
-                    <td>
-                      <InputSelect
-                        className={"form-control text-center p-1"}
-                        onChange={(e) =>
-                          setEditedItem({
-                            ...editedItem,
-                            category: e.target.value,
-                          })
-                        }
-                        dinamisOption={Category}
-                      />
-                    </td>
-                    <td>
-                      <Input
-                        className={"form-control text-center px-1"}
-                        type="text"
-                        value={editedItem.amount}
-                        onChange={(e) =>
-                          setEditedItem({
-                            ...editedItem,
-                            amount: e.target.value,
-                          })
-                        }
-                      />
-                    </td>
-                    <td>
-                      <Input
-                        className={"form-control text-center px-1"}
-                        type="date"
-                        value={editedItem.date}
-                        onChange={(e) =>
-                          setEditedItem({ ...editedItem, date: e.target.value })
-                        }
-                      />
-                    </td>
-                    <td className="py-4">
-                      <button
-                        className="btn btn-success me-1 border-light edit-style"
-                        onClick={saveEditedItem}>
-                        Save
-                      </button>
-                      <button
-                        className="btn btn-danger delete-style"
-                        onClick={cancelEdit}>
-                        Cancel
-                      </button>
-                    </td>
-                  </>
-                ) : (
-                  <>
-                    <td className="py-4">{item.transactionName}</td>
-                    <td className="py-4">
-                      <p
-                        className={`text-uppercase rounded p-1 ${
-                          item.type === "Spending"
-                            ? "type-spending"
-                            : "type-earning"
-                        }`}>
-                        {item.type}
-                      </p>
-                    </td>
-                    <td className="py-4">{item.category}</td>
-                    <td className="py-4">
-                      {new Intl.NumberFormat("id-ID", {
-                        style: "currency",
-                        currency: "IDR",
-                        minimumFractionDigits: 0,
-                      }).format(item.amount)}
-                    </td>
-                    <td className="py-4">{item.date}</td>
-                    <td className="py-4">
-                      <button
-                        className="btn btn-success me-1 border-light edit-style"
-                        onClick={() => handleEdit(item.id)}>
-                        Edit
-                      </button>
-                      <button
-                        className="btn btn-danger delete-style"
-                        onClick={() => handleDelete(item.id)}>
-                        Delete
-                      </button>
-                    </td>
-                  </>
-                )}
-              </tr>
-            ))}
-          </tbody>
+          {isLoading ? (
+            <tbody>
+              <td></td>
+              <td></td>
+              <td>
+                <Loader />
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tbody>
+          ) : (
+            <tbody>
+              {posts.map((item, index) => (
+                <tr
+                  key={index}
+                  className={
+                    item.type === "Spending" ? "type-spending" : "type-earning"
+                  }>
+                  {editItemId === item.id ? (
+                    <>
+                      <td>
+                        <Input
+                          className={"form-control text-center px-1"}
+                          type="text"
+                          value={editedItem.transactionName}
+                          onChange={(e) =>
+                            setEditedItem({
+                              ...editedItem,
+                              transactionName: e.target.value,
+                            })
+                          }
+                        />
+                      </td>
+                      <td>
+                        <InputSelect
+                          className={"form-control text-center pt-1"}
+                          onChange={(e) =>
+                            setEditedItem({
+                              ...editedItem,
+                              type: e.target.value,
+                            })
+                          }
+                          dinamisOption={Type}
+                        />
+                      </td>
+                      <td>
+                        <InputSelect
+                          className={"form-control text-center p-1"}
+                          onChange={(e) =>
+                            setEditedItem({
+                              ...editedItem,
+                              category: e.target.value,
+                            })
+                          }
+                          dinamisOption={Category}
+                        />
+                      </td>
+                      <td>
+                        <Input
+                          className={"form-control text-center px-1"}
+                          type="text"
+                          value={editedItem.amount}
+                          onChange={(e) =>
+                            setEditedItem({
+                              ...editedItem,
+                              amount: e.target.value,
+                            })
+                          }
+                        />
+                      </td>
+                      <td>
+                        <Input
+                          className={"form-control text-center px-1"}
+                          type="date"
+                          value={editedItem.date}
+                          onChange={(e) =>
+                            setEditedItem({
+                              ...editedItem,
+                              date: e.target.value,
+                            })
+                          }
+                        />
+                      </td>
+                      <td className="py-4">
+                        <button
+                          className="btn btn-success me-1 border-light edit-style"
+                          onClick={saveEditedItem}>
+                          Save
+                        </button>
+                        <button
+                          className="btn btn-danger delete-style"
+                          onClick={cancelEdit}>
+                          Cancel
+                        </button>
+                      </td>
+                    </>
+                  ) : (
+                    <>
+                      <td className="py-4">{item.transactionName}</td>
+                      <td className="py-4">
+                        <p
+                          className={`text-uppercase rounded p-1 ${
+                            item.type === "Spending"
+                              ? "type-spending"
+                              : "type-earning"
+                          }`}>
+                          {item.type}
+                        </p>
+                      </td>
+                      <td className="py-4">{item.category}</td>
+                      <td className="py-4">
+                        {new Intl.NumberFormat("id-ID", {
+                          style: "currency",
+                          currency: "IDR",
+                          minimumFractionDigits: 0,
+                        }).format(item.amount)}
+                      </td>
+                      <td className="py-4">{item.date}</td>
+                      <td className="py-4">
+                        <button
+                          className="btn btn-success me-1 border-light edit-style"
+                          onClick={() => handleEdit(item.id)}>
+                          Edit
+                        </button>
+                        <button
+                          className="btn btn-danger delete-style"
+                          onClick={() => handleDelete(item.id)}>
+                          Delete
+                        </button>
+                      </td>
+                    </>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          )}
         </table>
       </div>
     </>
