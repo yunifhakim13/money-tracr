@@ -30,6 +30,7 @@ const Login = () => {
         const user = userCredential.user;
         console.log(user);
         localStorage.setItem("user", JSON.stringify(user));
+        alert("Login successful!");
         navigate("/dashboard");
       })
       .catch((error) => {

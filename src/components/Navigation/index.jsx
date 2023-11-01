@@ -8,13 +8,17 @@ const Navigation = () => {
   const navigate = useNavigate();
 
   const userSignOut = () => {
-    signOut(auth)
-      .then(() => {
-        console.log("sign out success");
-        localStorage.removeItem("user");
-        navigate("/");
-      })
-      .catch((error) => console.log(error));
+    const isConfirmed = window.confirm("Are you sure you want to log out?");
+
+    if (isConfirmed) {
+      signOut(auth)
+        .then(() => {
+          console.log("sign out success");
+          localStorage.removeItem("user");
+          navigate("/");
+        })
+        .catch((error) => console.log(error));
+    }
   };
 
   return (
