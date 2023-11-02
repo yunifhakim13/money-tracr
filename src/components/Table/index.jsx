@@ -11,7 +11,7 @@ const Table = () => {
   const [editItemId, setEditItemId] = useState(null);
   const [editedItem, setEditedItem] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const Type = ["Earning", "Spending"];
+  const Type = ["", "Earning", "Spending"];
   const Category = ["Primary", "Secondary"];
 
   useEffect(() => {
@@ -62,7 +62,6 @@ const Table = () => {
       setEditItemId(null);
       setEditedItem({});
       setIsLoading(false);
-      // location.reload();
     } catch (error) {
       console.error("Error updating data:", error);
     }
@@ -142,6 +141,7 @@ const Table = () => {
                       <td>
                         <InputSelect
                           className={"form-control text-center pt-1"}
+                          value={editedItem.type}
                           onChange={(e) =>
                             setEditedItem({
                               ...editedItem,
